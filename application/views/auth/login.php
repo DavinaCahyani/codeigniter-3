@@ -11,7 +11,7 @@
 <body class="container py-5">
     <div class= "card justify-content-center mx-auto"style="width: 20rem;">
   <div class="card-body">
-  <form action="connect_login.php" method="post"> 
+  <form action="<?php echo base_url();?>auth/aksi_login" method="post"> 
     <h5 class="card-title text-center">Login Page</h5>
     <img src="https://binusasmg.sch.id/ppdb/logobinusa.png" class="img-thumbnail" alt="image">
     <p class="text-center">SMK Bina Nusantara</p>
@@ -20,17 +20,14 @@
   <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email" name="email">
     <div class="mb-3">
   <label for="exampleFormControlInput1" class="form-label">Password</label>
-  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Password" name="password">
+  <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Password" name="password">
 </div>
 <div class= "text-center">
 <button type="submit" class="btn btn-primary">Login</button>
 </div>
   </div>
   </form>
-<br> 
-          <p class="text-center">sudah punya akun? <a href="register.php">register akun</a></p>
   </div>
 </div>
-
 </body>
 </html>
