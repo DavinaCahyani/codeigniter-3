@@ -1,4 +1,4 @@
-<?php include 'connect.php'?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,6 +71,7 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
+    height: 800px;
     background: #7386D5;
     color: #fff;
     transition: all 0.3s;
@@ -142,16 +143,6 @@ ul.CTAs a {
     margin-bottom: 5px;
 }
 
-a.download {
-    background: #fff;
-    color: #7386D5;
-}
-
-a.article,
-a.article:hover {
-    background: #6d7fcc !important;
-    color: #fff !important;
-}
 
 /* ---------------------------------------------------
     CONTENT STYLE
@@ -198,7 +189,8 @@ a.article:hover {
                         </li>
                     </ul>
                 </li>
-        </nav>
+                </nav>
+                <!-- content -->
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -206,35 +198,38 @@ a.article:hover {
                     <th>Nama</th>
                     <th>NISN</th>
                     <th>Gender</th>
+                    <th>Kelas</th>
 
                     <th class="text-center">Aksi</th>
                 </tr>
             </thead>
-            <tbody class="table-group-divider">
-                <?php 
-                    $sql = "select * from siswa 
-                    INNER JOIN kelas ON siswa.id_kelas= kelas.id";
-                    $result = mysqli_query($conn, $sql);
-                    $no = 1;
-                    foreach ($result as $row) {
-                    ?>
-                    <tr>
-                        <td><?= $no++; ?></td>
-                        <td><?= $row['nama_siswa']; ?></td>
-                        <td><?= $row['nisn']; ?></td>
-                        <td><?= $row['gender']; ?></td>
-                        <td class="text-center">
-                            <a href="<?= 'detail.php?id='.$row['id_siswa']; ?>" class="btn btn-sm btn-primary">Detail</a>
-                            <button onClick="<?= 'hapus('.$row['id_siswa'].')'; ?>" class="btn btn-sm btn-danger">Delete</button>
-                        </td>
 
+            <tbody class="table-group-divider">
+              <?php $no=0;foreach($siswa as $row): $no++ ?>
+                    <tr>
+                        <td><?php echo $no ?></td>
+                        <td><?php echo $row->nama_siswa?></td>
+                        <td><?php echo $row->nisn ?></td>
+                        <td><?php echo $row->gender ?></td>
+                        <td><?php echo tampil_full_kelas_byid($row->id_kelas) ?>
+                        <td class="text-center">
+                            <a href="<?php echo base_url('admin/tambahsiswa')?>" class="btn btn-sm btn-primary">Tambah</a>
+                            <a href="<?php echo base_url('admin/update')?>" class="btn btn-sm btn-primary">Ubah</a>
+                            <button onClick="hapus(<?php echo $row->id_siswa?>)" class="btn btn-sm btn-danger">Hapus</button>
+                        </td>
                     </tr>
-                    <?php
-                } 
-                ?>
+              <?php endforeach ?>
             </tbody>
         </table>
-        
     </div>
+   
+    <script>
+        function hapus(id) {
+            var yes = confirm('Yakin dihapus?')
+            if (yes == true) {
+                window.location.href="<?php echo base_url('admin/hapus_siswa/')?>" + id;
+            }
+        }
+    </script>
 </body>
 </html>

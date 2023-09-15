@@ -1,12 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-     integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 <style>
     /*
@@ -70,6 +71,7 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
+    height: 800px;
     background: #7386D5;
     color: #fff;
     transition: all 0.3s;
@@ -187,37 +189,43 @@ ul.CTAs a {
                         </li>
                     </ul>
                 </li>
-        </nav>
-
-        <!-- Page Content  -->
-        <div id="content">
-        <div class="card">
-  <h2 class="card-header">Jumlah Kelas</h2>
-  <div class="card-body">
-    <h2 class="card-text">3</h2>
-    <a href="#" class="btn  btn-sm btn-primary">Go somewhere</a>
-  </div>
-</div>
-<br>
-        <div class="card">
-  <h2 class="card-header">Jumlah Siswa</h2>
-  <div class="card-body">
-    <h2 class="card-text">150</h2>
-    <a href="#" class="btn  btn-sm btn-primary">Go somewhere</a>
-  </div>
-</div>
-<br>
-        <div class="card">
-  <h2 class="card-header">Jumlah Guru</h2>
-  <div class="card-body">
-    <h2 class="card-text">10</h2>
-    <a href="#" class="btn  btn-sm btn-primary">Go somewhere</a>
-  </div>
-</div>
-</div>
+                </nav>
+                <!-- content -->
+                <div class="card w-100 m-auto p-3">
+        <h3 class="text-center">Tambah Siswa</h3>
+        <form action = "<?php echo base_url('admin/aksi_tambahsiswa')?>"
+              encytype="multipart/form-data"
+              method="post" class="row">
+            <div class="mb-3 col-6">
+                <label for="nama" class="form-label">Nama Siswa</label>
+                <input type="text" class="form-control" id="nama" name="nama">
+            </div>
+            <div class="mb-3 col-6">
+                <label for="nama" class="form-label">NISN</label>
+                <input type="text" class="form-control" id="nisn" name="nisn" >
+            </div>
+            <div class="mb-3 col-6">
+                <label for="gender" class="form-label">Gender</label>
+                <select name="gender" class="form-select">
+                    <option value="" selected></option>
+                    <option value="Laki-Laki">Laki-Laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                </select>
+            </div>
+            <div class="mb-3 col-6">
+                <label for="kelas" class="form-label">Kelas</label>
+                <select name="id_kelas" id="kelas" class="form-select">
+                    <option selected>Pilih Kelas</option>
+                    <?php foreach ($kelas as $row):?>
+                    <option value="<?php echo $row->id ?>">
+                    <?php echo $row->tingkat_kelas.' '.$row->jurusan_kelas; ?> </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="mb-3 col-12">
+                    <button type="submit" class="btn btn-primary">Tambah</button>
                 </div>
-            </nav>
-        </div>
+        </form>
     </div>
 </body>
 </html>

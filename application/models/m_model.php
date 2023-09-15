@@ -7,5 +7,15 @@ class M_model extends CI_Model {
     {
         return $this->db->get_where($table, $data);
     }
+    function delete($table, $field, $id)
+    {
+        $data=$this->db->delete($table, array($field => $id));
+        return $data;
+    }
+    function tambah_data($table, $data)
+    {
+        $this->db->insert($table, $data);
+        return $this->db->insert_id();
+    }
 }
 ?>

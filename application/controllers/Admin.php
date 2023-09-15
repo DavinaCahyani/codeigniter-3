@@ -20,7 +20,35 @@ class admin extends CI_Controller
     }
     public function datasiswa()
     {
-        $this->load->view('admin/datasiswa');
+        $data['siswa'] = $this->m_model->get_data('siswa')->result();
+        $this->load->view('admin/datasiswa' , $data);
+    }
+    public function tambahsiswa()
+    {
+        $data['kelas'] = $this->m_model->get_data('kelas')->result();
+        $this->load->view('admin/tambahsiswa', $data);
+    }
+    public function update()
+    {
+        $data['kelas'] = $this->m_model->get_data('kelas')->result();
+        $this->load->view('admin/update', $data);
+    }
+    public function aksi_tambahsiswa()
+    {
+        $data=[
+            'nama_siswa' => $this->input->post('nama'),
+            'nisn' => $this->input->post('nisn'),
+            'gender' => $this->input->post('gender'),
+            'id_kelas' => $this->input->post('id_kelas'),
+        ];
+        $this->m_model->tambah_data('siswa', $data);
+        redirect(base_url('admin/datasiswa'));
+    }
+
+    public function hapus_siswa($id)
+    {
+       $this->m_model->delete('siswa', 'id_siswa', $id);
+        redirect(base_url('admin/datasiswa'));
     }
 
 }
