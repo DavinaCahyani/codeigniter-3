@@ -194,24 +194,32 @@ ul.CTAs a {
         <div class="card">
   <h2 class="card-header">Jumlah Kelas</h2>
   <div class="card-body">
-    <h2 class="card-text">3</h2>
-    <a href="#" class="btn  btn-sm btn-primary">Go somewhere</a>
+    <h2 class="card-text"><?php echo $kelas;?>
+</h2>
   </div>
 </div>
 <br>
         <div class="card">
   <h2 class="card-header">Jumlah Siswa</h2>
   <div class="card-body">
-    <h2 class="card-text">150</h2>
-    <a href="#" class="btn  btn-sm btn-primary">Go somewhere</a>
+    <h2 class="card-text"><?php echo $siswa;?>
+</h2>
+  </div>
+</div>
+<br>
+        <div class="card">
+  <h2 class="card-header">Jumlah Mapel</h2>
+  <div class="card-body">
+    <h2 class="card-text"><?php echo $mapel;?>
+</h2>
   </div>
 </div>
 <br>
         <div class="card">
   <h2 class="card-header">Jumlah Guru</h2>
   <div class="card-body">
-    <h2 class="card-text">10</h2>
-    <a href="#" class="btn  btn-sm btn-primary">Go somewhere</a>
+    <h2 class="card-text"><?php echo $siswa;?>
+</h2>
   </div>
 </div>
 </div>

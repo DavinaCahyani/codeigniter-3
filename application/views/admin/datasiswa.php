@@ -211,10 +211,10 @@ ul.CTAs a {
                         <td><?php echo $row->nama_siswa?></td>
                         <td><?php echo $row->nisn ?></td>
                         <td><?php echo $row->gender ?></td>
-                        <td><?php echo tampil_full_kelas_byid($row->id_kelas) ?>
+                        <td><?php echo tampil_full_kelas_byid($row->id_kelas) ?></td>
                         <td class="text-center">
-                            <a href="<?php echo base_url('admin/tambahsiswa')?>" class="btn btn-sm btn-primary">Tambah</a>
-                            <a href="<?php echo base_url('admin/update')?>" class="btn btn-sm btn-primary">Ubah</a>
+                            <a href="<?php echo base_url('admin/tambahsiswa/').$row->id_siswa?>" class="btn btn-sm btn-primary">Tambah</a>
+                            <a href="<?php echo base_url('admin/ubah_siswa/').$row->id_siswa?>" class="btn btn-sm btn-primary">Ubah</a>
                             <button onClick="hapus(<?php echo $row->id_siswa?>)" class="btn btn-sm btn-danger">Hapus</button>
                         </td>
                     </tr>
@@ -222,7 +222,6 @@ ul.CTAs a {
             </tbody>
         </table>
     </div>
-   
     <script>
         function hapus(id) {
             var yes = confirm('Yakin dihapus?')
