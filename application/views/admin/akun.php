@@ -155,7 +155,9 @@ a[aria-expanded="true"] {
 }
 </style>
 
+
 <body>
+    <?php foreach ($user as $users) : ?>
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
@@ -172,49 +174,62 @@ a[aria-expanded="true"] {
                         <li>
                             <a href="<?php echo base_url('admin/datasiswa')?>">Data Siswa</a>
                         </li>
+                        <li>
+                            <a href="<?php echo base_url('admin/akun')?>">Account</a>
+                        </li>
                     </ul>
                 </li>
+            </ul>
+            <div class="logout">
+                <a href="<?php echo base_url('auth')?>" style="color: #fff; text-decoration: none;">
+                    <img src="https://media.istockphoto.com/id/1268956056/id/vektor/ikon-vektor-logout-terisolasi-pada-latar-belakang-putih-garis-besar-ikon-logout-garis-tipis.jpg?s=170667a&w=0&k=20&c=UgA9skSIk-m-ENdmH2_2KSaCTPbg1lSCERAvTL3Qosc="
+                        alt="Logout" style="width: 30px; opacity: 0.5; margin-right: 10px;" />Logout
+                </a>
+            </div>
         </nav>
-        <!-- content -->
-        <div class="card w-100 m-auto p-3">
-            <h3 class="text-center">Tambah Siswa</h3>
-            <form action="<?php echo base_url('admin/aksi_tambahsiswa')?>" encytype="multipart/form-data" method="post"
-                class="row">
-                <div class="mb-3 col-6">
-                    <label for="nama" class="form-label">Nama Siswa</label>
-                    <input type="text" class="form-control" id="nama" name="nama">
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <p class="navbar-brand">Account</p>
                 </div>
-                <div class="mb-3 col-6">
-                    <label for="nama" class="form-label">NISN</label>
-                    <input type="text" class="form-control" id="nisn" name="nisn">
-                </div>
-                <div class="mb-3 col-6">
-                    <label for="gender" class="form-label">Gender</label>
-                    <select name="gender" class="form-select">
-                        <option value="" selected></option>
-                        <option value="Laki-Laki">Laki-Laki</option>
-                        <option value="Perempuan">Perempuan</option>
-                    </select>
-                </div>
-                <div class="mb-3 col-6">
-                    <label for="kelas" class="form-label">Kelas</label>
-                    <select name="id_kelas" id="kelas" class="form-select">
-                        <option selected>Pilih Kelas</option>
-                        <?php foreach ($kelas as $row):?>
-                        <option value="<?php echo $row->id ?>">
-                            <?php echo $row->tingkat_kelas.' '.$row->jurusan_kelas; ?> </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="mb-3 col-6">
-                    <label for="nama" class="form-label">Foto</label>
-                    <input type="file" class="form-control" id="foto" name="foto">
-                </div>
-                <div class="mb-3 col-12">
-                    <button type="submit" class="btn btn-primary">Tambah</button>
-                </div>
-            </form>
+            </nav>
+            <br>
+            <br>
+            <br>
+            <div class="card w-100 m-auto p-3">
+                <h3 class="text-center">Akun</h3>
+                <form action="<?php echo base_url('admin/aksi_ubah_akun')?>" encytype="multipart/form-data"
+                    method="post">
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="email" name="email"
+                                value="<?php echo $users->email ?>">
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username"
+                                value="<?php echo $users->username ?>">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label for="new-password" class="form-label">Password Baru</label>
+                            <input type="text" class="form-control" id="password_baru" name="password_baru" value="">
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="confirm-password" class="form-label">Konfirmasi Password</label>
+                            <input type="text" class="form-control" id="konfirmasi_password" name="konfirmasi_password"
+                                value="">
+                        </div>
+                    </div>
+                    <div class="mb-3 col-12">
+                        <button type="submit" class="btn btn-primary">Ubah</button>
+                    </div>
+                </form>
+            </div>
         </div>
 </body>
+<?php endforeach ?>
 
 </html>
