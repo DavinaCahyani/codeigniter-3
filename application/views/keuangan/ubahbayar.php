@@ -7,6 +7,8 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <style>
 /* DEMO STYLE */
@@ -167,54 +169,58 @@ a[aria-expanded="true"] {
                 <li class="active">
                     <ul>
                         <li>
-                            <a href="<?php echo base_url('admin/index')?>">Dashboard Sekolah</a>
+                            <a href="<?php echo base_url('keuangan/index')?>">Dashboard Keuangan</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('admin/datasiswa')?>">Data Siswa</a>
+                            <a href="<?php echo base_url('keuangan/pembayaran')?>">Pembayaran</a>
                         </li>
                     </ul>
                 </li>
+            </ul>
+
         </nav>
         <!-- content -->
         <div class="card w-100 m-auto p-3">
-            <h3 class="text-center">Tambah Siswa</h3>
-            <form action="<?php echo base_url('admin/aksi_tambahsiswa')?>" enctype="multipart/form-data" method="post"
+            <h3 class="text-center">Update</h3>
+            <?php foreach($pembayaran as $data_pembayaran): ?>
+            <form action="<?php echo base_url('keuangan/aksi_ubah_bayar')?>" enctype="multipart/form-data" method="post"
                 class="row">
+                <input name="id" type="hidden" value="<?php echo $data_pembayaran->id?>">
                 <div class="mb-3 col-6">
-                    <label for="nama" class="form-label">Nama Siswa</label>
-                    <input type="text" class="form-control" id="nama" name="nama">
+                    <label for="siswa" class="form-label">Nama Siswa</label>
+                    <select name="id_siswa" class="form-select">
+                        <?php foreach ($siswa as $row) : ?>
+                        <option value="<?php echo $row->id_siswa ?>">
+                            <?php echo $row->nama_siswa ?>
+                        </option>
+                        <?php endforeach ?>
+                    </select>
                 </div>
+
                 <div class="mb-3 col-6">
-                    <label for="nama" class="form-label">NISN</label>
-                    <input type="text" class="form-control" id="nisn" name="nisn">
-                </div>
-                <div class="mb-3 col-6">
-                    <label for="gender" class="form-label">Gender</label>
-                    <select name="gender" class="form-select">
-                        <option value="" selected></option>
-                        <option value="Laki-Laki">Laki-Laki</option>
-                        <option value="Perempuan">Perempuan</option>
+                    <label for="jenis_pembayaran" class="form-label">Jenis Pembayaran</label>
+                    <select name="jenis_pembayaran" id="id_pembayaran" class="form-select">
+                        <option selected value="<?php echo $data_pembayaran->jenis_pembayaran ?>">
+                            <?php echo $data_pembayaran->jenis_pembayaran ?>
+                        </option>
+                        <option value="Pembayaran SPP">Pembayaran SPP</option>
+                        <option value="Pembayaran Uang Gedung">Pembayaran Uang Gedung</option>
+                        <option value="Pembayaran Uang Seragam">Pembayaran Uang Seragam</option>
                     </select>
                 </div>
                 <div class="mb-3 col-6">
-                    <label for="kelas" class="form-label">Kelas</label>
-                    <select name="id_kelas" id="kelas" class="form-select">
-                        <option selected>Pilih Kelas</option>
-                        <?php foreach ($kelas as $row):?>
-                        <option value="<?php echo $row->id ?>">
-                            <?php echo $row->tingkat_kelas.' '.$row->jurusan_kelas; ?> </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="mb-3 col-6">
-                    <label for="nama" class="form-label">Foto</label>
-                    <input type="file" class="form-control" id="foto" name="foto">
+                    <label for="nama" class="form-label">Total Pembayaran</label>
+                    <input type="text" class="form-control" id="total_pembayaran" name="total_pembayaran"
+                        value="<?php echo $data_pembayaran->total_pembayaran?>">
                 </div>
                 <div class="mb-3 col-12">
-                    <button type="submit" class="btn btn-primary">Tambah</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </div>
             </form>
+            <?php endforeach ?>
         </div>
+    </div>
+
 </body>
 
 </html>
