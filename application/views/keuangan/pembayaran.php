@@ -215,9 +215,9 @@
                     <?php $no=0;foreach($pembayaran as $row): $no++ ?>
                     <tr>
                         <td><?php echo $no ?></td>
-                        <td> <?php echo tampil_nama_siswa($row->id_siswa) ?></td>
-                        <td><?php echo $row->jenis_pembayaran ?></td>
-                        <td><?php echo $row->total_pembayaran ?></td>
+                        <td> <?php echo nama_siswa($row->id_siswa) ?></td>
+                        <td><?php echo $row->jenis_pembayaran?></td>
+                        <td><?php echo convRupiah($row->total_pembayaran)?></td>
                         <td class="text-center">
                             <a href="<?php echo base_url('keuangan/ubahbayar/').$row->id_siswa?>"
                                 class="btn btn-sm btn-primary">Ubah</a>

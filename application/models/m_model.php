@@ -27,6 +27,10 @@ class M_model extends CI_Model {
         $data=$this->db->update($tabel, $data, $where);
         return $this->db->affected_rows();
     }
+    public function get_by_column($table, $column, $value)
+    {
+        return $this->db->get_where($table, array($column => $value));
+    }
     public function get_siswa_foto_by_id($id_siswa)
 {
     $this->db->select('foto');
@@ -39,6 +43,20 @@ class M_model extends CI_Model {
         return $result->foto;
     } else {
         return false;
+    }
+}
+public function getNamaSiswaByID($id_siswa)
+{
+    // Gantilah 'siswa' dengan nama tabel yang sesuai di database Anda.
+    $this->db->select('nama_siswa');
+    $this->db->where('id_siswa', $id_siswa);
+    $query = $this->db->get('siswa');
+
+    if ($query->num_rows() > 0) {
+        $row = $query->row();
+        return $row->nama_siswa;
+    } else {
+        return null; // Atau Anda bisa mengembalikan nilai default jika ID siswa tidak ditemukan.
     }
 }
 
