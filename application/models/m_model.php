@@ -60,6 +60,32 @@ public function getNamaSiswaByID($id_siswa)
     }
 }
 
+public function getDataPembayaran() 
+{
+$this->db->select('pembayaran.id, pembayaran.jenis_pembayaran, pembayaran.total_pembayaran, siswa.nama_siswa, kelas.tingkat_kelas,
+kelas.jurusan_kelas');
+$this->db->from('pembayaran');
+$this->db->join('siswa', 'siswa.id_siswa = pembayaran.id_siswa','left');
+$this->db->join('kelas', 'siswa.id_kelas = kelas.id','left');
+$query = $this->db->get();
 
+return $query->result();
+}
+
+// Import
+public function get_by_nisn($nisn) 
+{
+$this->db->select('id_siswa');
+$this->db->from('siswa');
+$this->db->where('nisn', $nisn);
+$query = $this->db->get();
+
+if($query->num_rows()>0) {
+    $result = $query->row();
+    return $result->id_siswa;
+} else {
+return false;
+}
+}
 }
 ?>

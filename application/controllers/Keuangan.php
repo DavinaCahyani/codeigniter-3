@@ -64,22 +64,19 @@ class Keuangan extends CI_Controller {
         $sheet->getStyle('D3')->applyFromArray($style_col);
         $sheet->getStyle('E3')->applyFromArray($style_col);
 
-        $data_pembayaran = $this->m_model->get_data('pembayaran')->result();
-        $data['siswa'] = $this->m_model->get_data('siswa')->result();
+       
+        $data= $this->m_model->getDataPembayaran();
       
-
-
         $no= 1;
         $numrow = 4;
-        foreach($data_pembayaran as $data) {
+        foreach($data as $data) {
             
         $sheet->setCellValue('A'.$numrow,$data->id);
         $sheet->setCellValue('B'.$numrow,$data->jenis_pembayaran);
-        $sheet->setCellValue('C'.$numrow,$data->total_pembayaran);
-        $nama_siswa = nama_siswa($data->id_siswa); 
-        $sheet->setCellValue('D' . $numrow, $nama_siswa);
+        $sheet->setCellValue('C'.$numrow,$data->total_pembayaran); 
+        $sheet->setCellValue('D' . $numrow,$data->nama_siswa);
+        $sheet->setCellValue('E' . $numrow,$data->tingkat_kelas .''. $data->jurusan_kelas);
 
-      
         $sheet->getStyle('A'.$numrow)->applyFromArray($style_row);
         $sheet->getStyle('B'.$numrow)->applyFromArray($style_row);
         $sheet->getStyle('C'.$numrow)->applyFromArray($style_row);
@@ -180,8 +177,34 @@ class Keuangan extends CI_Controller {
         }
     }
     
-    
-
+    public function import()
+    {
+      if(isset($_FILES["file"]["name"])) {
+        $path = $_FILES["file"]["tmp_name"];
+        $object = PhpOffice\PhpSpreadsheet\IOFactory::load($path);
+        foreach($object->getWorksheetIterator() as $worksheet) {
+          $highestRow = $worksheet->getHighestRow();
+          $highestColumn = $worksheet->getHighestColumn();
+          for($row=2; $row<=$highestRow; $row++) {
+            $jenis_pembayaran = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+            $total_pembayaran = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+            $nisn = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+  
+            $get_id_by_nisn = $this->m_model->get_by_nisn($nisn);
+            $data = array(
+              'jenis_pembayaran' => $jenis_pembayaran,
+              'total_pembayaran' => $total_pembayaran,
+              'id_siswa' => $get_id_by_nisn
+            );
+            $this->m_model->tambah_data('pembayaran', $data);
+          }
+        }
+        redirect(base_url('keuangan/pembayaran'));
+      } else {
+        echo 'Invalid File';
+      }
+    }
+  
 	
 	public function hapus_bayar($id)
     {

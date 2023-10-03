@@ -199,6 +199,12 @@
             <br>
             <br>
             <br>
+            <div class="">
+                <a href="<?php echo base_url('keuangan/tambahbayar')?>" class="btn btn-primary">Tambah</a>
+                <a href="<?php echo base_url('keuangan/export')?>" class="btn btn-primary">Export</a>
+                <!-- Button trigger modal -->
+
+            </div>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -228,10 +234,14 @@
                     <?php endforeach ?>
                 </tbody>
             </table>
-            <div class="text-center">
-                <a href="<?php echo base_url('keuangan/tambahbayar')?>" class="btn btn-primary">Tambah</a>
-                <a href="<?php echo base_url('keuangan/export')?>" class="btn btn-primary">Export</a>
+
+            <div class="">
+                <form action="<?= base_url('keuangan/import')?>" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" />
+                    <input type="submit" name="import" class="btn btn-primary" value="Import" />
+                </form>
             </div>
+
         </div>
         <script>
         function hapus(id) {
@@ -259,6 +269,15 @@
             });
         }
         </script>
+        <!-- <script>
+        var myModal = document.getElementById('myModal')
+        var myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', function() {
+            myInput.focus()
+        })
+        </script> -->
+
 </body>
 
 </html>
