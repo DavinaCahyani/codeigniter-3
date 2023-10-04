@@ -72,6 +72,15 @@ $query = $this->db->get();
 return $query->result();
 }
 
+public function get_data_siswa() {
+    // Gantilah 'nama_tabel' dengan nama tabel Anda
+$this->db->join('kelas', 'siswa.id_kelas = kelas.id','left');
+
+    $query = $this->db->get('siswa');
+    
+    // Mengembalikan hasil query dalam bentuk array
+    return $query->result();
+}
 // Import
 public function get_by_nisn($nisn) 
 {
@@ -87,5 +96,22 @@ if($query->num_rows()>0) {
 return false;
 }
 }
+
+public function get_by_jurusan($jurusan, $tingkat) 
+{
+    $this->db->select('id');
+    $this->db->from('kelas');
+    $this->db->where('jurusan_kelas', $jurusan);
+    $this->db->where('tingkat_kelas', $tingkat);
+    $query = $this->db->get();
+
+    if ($query->num_rows() > 0) {
+        $result = $query->row();
+        return $result->id;
+    } else {
+        return false;
+    }
+}
+
 }
 ?>

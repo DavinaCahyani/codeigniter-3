@@ -238,7 +238,7 @@
                 </tbody>
             </table>
             <div class="">
-                <form action="<?= base_url('admin/import')?>" method="post" enctype="multipart/form-data">
+                <form action="<?= base_url('keuangan/import')?>" method="post" enctype="multipart/form-data">
                     <input type="file" name="file" />
                     <input type="submit" name="import" class="btn btn-primary" value="Import" />
                 </form>
