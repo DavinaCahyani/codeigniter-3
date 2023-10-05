@@ -215,6 +215,10 @@ a[aria-expanded="true"] {
 
                     </select>
                 </div>
+                <div class="mb-3 col-6">
+                    <label for="nama" class="form-label">Foto</label>
+                    <input type="file" class="form-control" id="foto" name="foto">
+                </div>
                 <div class="mb-3 col-12">
                     <button type="submit" class="btn btn-primary">Update</button>
                 </div>

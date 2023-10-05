@@ -224,7 +224,7 @@ class admin extends CI_Controller
         $sheet->getColumnDimension('C')->setWidth(25);
         $sheet->getColumnDimension('D')->setWidth(20);
         $sheet->getColumnDimension('E')->setWidth(30);
-        // $sheet->getColumnDimension('F')->setWidth(35);
+        $sheet->getColumnDimension('F')->setWidth(35);
 
 
         $sheet->getDefaultRowDimension()->setRowHeight(-1);
