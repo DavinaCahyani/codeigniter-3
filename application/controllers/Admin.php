@@ -374,5 +374,19 @@ class admin extends CI_Controller
             redirect(base_url('admin/akun'));
         }
     }
+    public function export_guru()
+    {
+        $data['data_guru'] = $this->m_model->get_data('guru')->result();
+        $data['nama'] = 'guru';
+        if ($this->uri->segment(3)=="pdf") {
+            $this->load->library('pdf');
+            $this->pdf->load_view('admin/export_data_guru',$data);
+            $this->pdf->render();
+            $this->pdf->stream("data_guru.pdf", array ("Attachment" => false));
+        } else {
+            $this->load->view('admin/download_data_guru',$data);
+
+        }
+    }
 }
 ?>
