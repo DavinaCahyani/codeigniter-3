@@ -32,9 +32,11 @@
             <td>Mapel</td>
             <td>Kelas</td>
         </tr>
-        <?php $no = 1;
+        <?php $no = 1 ;
         foreach ($data_guru as $key) {
             $mapel = $this->m_model->get_mapel_by_id($key->id_mapel);
+            $kelas = tampil_full_kelas_byid($key->id_walikelas);
+                // Dapatkan kelas berdasarkan ID guru walikelas
         ?>
         <tr>
             <td><?php echo $no++; ?></td>
@@ -42,7 +44,7 @@
             <td><?php echo $key->nik; ?></td>
             <td><?php echo $key->gender; ?></td>
             <td><?php echo $mapel->nama_mapel; ?></td>
-            <!-- <td><?php echo tampil_full_kelas_byid($key->id_guru_walikelas) ?></td> -->
+            <td><?php echo ($kelas) ? $kelas : 'Tidak menjadi walikelas' ?></td>
 
 
         </tr>

@@ -125,6 +125,16 @@ public function get_mapel_by_id($id_mapel)
     }
 }
 
+// Contoh metode get_kelas_by_id dalam model
+public function get_kelas_by_id($id_kelas)
+{
+    // Gantilah 'nama_kelas' dengan nama kolom yang sesuai di tabel kelas
+    $query = $this->db->select('tingkat_kelas', 'jurusan_kelas')
+        ->where('id_kelas', $id_kelas)
+        ->get('kelas');
+
+    return $query->row();
+}
 
 
 }

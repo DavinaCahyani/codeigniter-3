@@ -11,7 +11,7 @@ header("Content-Disposition: attachment; filename=".$nama." .xls");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>Data Guru</title>
 </head>
 
 <body>
@@ -34,27 +34,29 @@ header("Content-Disposition: attachment; filename=".$nama." .xls");
         <tr style="font-weight: bold;">
             <td>No</td>
             <td>Nama Guru</td>
-            <td>NIK </td>
-            <td>Gender </td>
-            <td>Mapel </td>
-            <td>Kelas </td>
+            <td>NIK</td>
+            <td>Gender</td>
+            <td>Mapel</td>
+            <td>Kelas</td>
         </tr>
-        <?php $no= 1; 
-		foreach ($data_guru as $key) { 
+        <?php $no = 1 ;
+        foreach ($data_guru as $key) {
             $mapel = $this->m_model->get_mapel_by_id($key->id_mapel);
-            ?>
+            $kelas = tampil_full_kelas_byid($key->id_walikelas);
+                // Dapatkan kelas berdasarkan ID guru walikelas
+        ?>
         <tr>
             <td><?php echo $no++; ?></td>
             <td><?php echo $key->nama_guru; ?></td>
-            <td><?php echo $key->nik ;?></td>
+            <td><?php echo $key->nik; ?></td>
             <td><?php echo $key->gender; ?></td>
             <td><?php echo $mapel->nama_mapel; ?></td>
+            <td><?php echo ($kelas) ? $kelas : 'Tidak menjadi walikelas' ?></td>
+
 
         </tr>
         <?php } ?>
     </table>
-
-
 </body>
 
 </html>
